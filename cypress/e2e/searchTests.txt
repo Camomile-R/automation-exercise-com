@@ -1,0 +1,21 @@
+/// <reference types="Cypress" />
+
+import productsPage from '../pages/allProductsPage';
+
+const allProductsPage = new productsPage();
+
+describe("www.automationexercise.com , search engine test", () => {
+    beforeEach(() => {
+        cy.openHomePage();
+        allProductsPage.visit();
+    });
+
+  //Test Case 9: Search Product
+  it("Checks if search engine finds given product", () => {
+    cy.log('')
+    //6. Enter product name in search input and click search button
+    //7. Verify 'SEARCHED PRODUCTS' is visible
+    //8. Verify all the products related to search are visible
+
+  });
+});
