@@ -1,43 +1,45 @@
 /// <reference types="Cypress" />
 
-import menu from '../pages/topNavBarPage';
-import productsPage from '../pages/allProductsPage';
-import newUserData from '../fixtures/newUserData';
+import newUserDataObj from '../fixtures/user';
 
-const validUser = new newUserData();
-const currentPage = new menu();
-const allProductsPage = new productsPage();
+const userData = new newUserDataObj();
 
 describe("https://www.automationexercise.com/*", () => {
   beforeEach(() => {cy.openHomePage()});
 
   //Test Case 6: Contact Us Form
   it("Checks 'Contact Us' happy pass flow with correct user", () => {
-    currentPage.forceClickAndCheck.button_ContactUs();
-    cy.submitContactUsForm(validUser);
+    cy.clickMainMenuBtn('button_ContactUs');
+    cy.locationShouldBe('contactUs');
+    cy.submitContactUsForm(userData.validUser);
+    cy.checkContactUsFormSubmitted();
   });
 
   //Test Case 7: Verify Test Cases Page
   it("Checks 'Test Cases' page at https://www.automationexercise.com/test_cases", () => {
-    currentPage.forceClickAndCheck.button_TestCases
+    cy.clickMainMenuBtn('button_TestCases');
+    cy.locationShouldBe('testCases')
+    cy.verifyTestCasesPage();
   });
 
   //Test Case 8: Verify All Products and product detail page
   it("Checks 'All Products' page at https://www.automationexercise.com/products", () => {
-    currentPage.forceClickAndCheck.button_Products();
-    allProductsPage.checkTheProductsList();
-    allProductsPage.checkTheFirstProduct();
+    cy.clickMainMenuBtn('button_Products');
+    cy.locationShouldBe('allProducts');
+    cy.checkIfProductsListIsVisible();
+    cy.pickTheTileOfProduct('1').click({force:true});
+    cy.checkDetailedViewProductDataIsVisible();
   });
 
   //Test Case 10: Verify Subscription in home page
   it("Checks 'Subscribtion' at the footer", () => {
-    cy.subscribeUserViaFooter(validUser);
+    cy.subscribeViaFooterWith(userData.invalidUser['userEmail']);
   });
 
   //Test Case 11: Verify Subscription in Cart page
   it("Checks 'Subscribtion' at the footer", () => {
-    currentPage.forceClickAndCheck.button_Cart();
-    cy.subscribeUserViaFooter(validUser);
+    cy.clickMainMenuBtn('button_Cart');
+    cy.locationShouldBe('viewCart');
+    cy.subscribeViaFooterWith(userData.invalidUser['userEmail']);
   });
-  
 });

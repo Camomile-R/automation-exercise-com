@@ -1,37 +1,31 @@
 /// <reference types="Cypress" />
 
-import userData from '../fixtures/userData';
-import logInPage from '../pages/loginPage'
+import userDataObj from '../fixtures/user';
 
-const validUser = new userData();
-const invalidUser = new userData();
-const loginPage = new logInPage();
+const userData = new userDataObj();
 
-invalidUser.credentials.userEmail = 'invalidUser@test'
-invalidUser.credentials.userPassword = 'invalidUserTest'
-
-describe("www.automationexercise.com/loginTests", () => {
+describe("www.automationexercise.com/login >> Tests", () => {
   beforeEach(() => {
+    cy.clearCookiesAndCache();
     cy.openHomePage();
-    loginPage.visit();
   });
 
   //Test Case 2: Login User with correct email and password
   it("Checks login with correct user", () => {
-    cy.loginUser(validUser.credentials);
-    cy.checkLoggedInUser((validUser));
+    cy.loginUser(userData['validUser']);
+    cy.checkLoggedInUser((userData['validUser']));
   });
 
   //Test Case 3: Login User with incorrect email and password
   it("Checks login with incorrect user", () => {
-    cy.loginUser(invalidUser.credentials);
-    loginPage.checkIncorrectUserValigadion();
+    cy.loginUser(userData['invalidUser']);
+    cy.checkIncorrectUserValidationAtLogin();
   });
 
   //Test Case 4: Logout User
-  it("Checks check unlogin with correct user", () => {
-    cy.loginUser(validUser.credentials);
-    cy.checkLoggedInUser((validUser));
+  it("Checks unlogin with correct user", () => {
+    cy.loginUser(userData['validUser']);
+    cy.checkLoggedInUser((userData['validUser']));
     cy.unloginTheUser();
   });
 });

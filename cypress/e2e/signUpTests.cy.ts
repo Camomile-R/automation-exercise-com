@@ -1,16 +1,10 @@
 /// <reference types="Cypress" />
 
-import newUserData from '../fixtures/newUserData';
-import knownUserData from '../fixtures/userData';
-import LoginPage from '../pages/loginPage';
-import signUpPage from '../pages/signUpPage';
+import userDataObj from '../fixtures/user';
 
-const newUser = new newUserData();
-const knownUser = new knownUserData();
-const loginPage = new LoginPage();
-const signupPage = new signUpPage();
+const userData = new userDataObj();
 
-describe("www.automationexercise.com/registerTests", () => {
+describe("www.automationexercise.com/register >> Tests", () => {
   beforeEach(() => {
     cy.clearCookiesAndCache();
     cy.openHomePage();
@@ -18,17 +12,15 @@ describe("www.automationexercise.com/registerTests", () => {
   
   //Test Case 1: Register User
   it("Register new user", () => {
-    cy.registerUser(newUser.requiredData);
-    signupPage.confirmUserRegistration();
-    cy.checkLoggedInUser(newUser);
+    cy.registerUser(userData.newUser);
+    cy.confirmUserRegistration();
+    cy.checkLoggedInUser(userData.newUser);
   });
 
   //Test Case 5: Register User with existing email
   it("Attempt to register existed user", () => {
-    loginPage.visit();
-    loginPage.registerForm.nameInput(knownUser.userFirstName);
-    loginPage.registerForm.emailInput(knownUser.userEmail);
-    loginPage.registerForm.registerBtn();
-    loginPage.checkExistingUserValigadion();
+    cy.visit('/login');
+    cy.fillInSignUpForm(userData.validUser);
+    cy.checkExistingUserValidationAtSignUp();
   });
 });

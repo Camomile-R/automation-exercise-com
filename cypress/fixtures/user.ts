@@ -1,5 +1,6 @@
-{
-   "knownUser":{
+export default class User {
+
+    validUser = {
         "userEmail": "romanpasteverka@gmail.com",
         "userPassword": "V%4^cy5CYx$534sr3R34cvv%c",
         "userFirstName": "Pasteverka",
@@ -9,8 +10,8 @@
         "userCity": "cityTest",
         "userZipcode": "zipcodeTest",
         "userMobile": "mobileTest"
-    },
-   "newCreatedUser":{
+    };
+    newUser = {
         "userEmail": "newuser@at.qa",
         "userPassword": "pikachU#QA",
         "userFirstName": "firstNameTest",
@@ -20,16 +21,16 @@
         "userCity": "cityTest",
         "userZipcode": "zipcodeTest",
         "userMobile": "mobileTest"
-    },
-    "spareUser":{
-        "userEmail": "s@at.qa",
-        "userPassword": "sp11",
-        "userFirstName": "t1",
-        "userLastName": "t1",
-        "userAddress": "t1",
-        "userState": "t1",
-        "userCity": "1t",
-        "userZipcode": "t1",
-        "userMobile": "111"
-    }
-}
+    };
+    invalidUser = {
+        "userEmail": "invalid@at.qa",
+        "userPassword": "pikachU#QA",
+        "userFirstName": "firstNameTest",
+        "userLastName": "lastNameTest",
+        "userAddress": "addressTest",
+        "userState": "stateTest",
+        "userCity": "cityTest",
+        "userZipcode": "zipcodeTest",
+        "userMobile": "mobileTest"
+    };
+};

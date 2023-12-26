@@ -1,7 +1,6 @@
 import { defineConfig } from 'cypress'
+import siteData from "./cypress/pages/allDataSite";
 
-export default defineConfig({
-  e2e: {
-    baseUrl: 'https://www.automationexercise.com',
-  },
-})
+const theSiteData = new siteData();
+
+export default defineConfig({e2e: {baseUrl: theSiteData.meta.URL}});

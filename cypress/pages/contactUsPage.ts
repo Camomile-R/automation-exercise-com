@@ -1,22 +1,28 @@
 /// <reference types="Cypress" />
+
 export default class ContactUsPage {
-    visit() {
-        cy.visit('/contact_us');
-        cy.title().should('contain', "Automation Exercise - Contact Us");
-    };
-    getInTouchForm = {
-      nameRequiredInput: (userName: string) => cy.get('input[data-qa="name"]').focus().type(userName),
-      emailRequiredInput: (userEmail: string) => cy.get('input[data-qa="email"]').focus().type(userEmail),
-      subjectOptionalInput: (subjectText: string) => cy.get('input[data-qa="subject"]').focus().type(subjectText),
-      messageTextAreaInput: (messageText: string) => cy.get('textarea[data-qa="message"]').focus().type(messageText),
-      //input file upload
-      clickSubmitBtn: () => cy.get('input[data-qa="submit-button"]').click({ force: true })
-    };
-    
-    confirmSubmittedForm() {
-      cy.title().should("contain", "Automation Exercise - Contact Us")
-      cy.get('div.status.alert.alert-success')
-      .contains("Success! Your details have been submitted successfully.").should('have.css', 'color').and('eq', 'rgb(60, 118, 61)')
-    }
-    }
-    
+
+  meta = {
+    'title': 'Automation Exercise - Contact Us',
+    'URL': '/contact_us'
+  }
+  //Form
+  getInTouchForm = {
+    'nameRequiredInput': 'input[data-qa="name"]',
+    'emailRequiredInput': 'input[data-qa="email"]',
+    'subjectOptionalInput': 'input[data-qa="subject"]',
+    'messageTextAreaInput': 'textarea[data-qa="message"]',
+    'fileUploadInput': '[id="contact-us-form"] [name="upload_file"]',
+    'submitBtn': 'input[data-qa="submit-button"]'
+  };
+  submittedFormElements = {
+    'alert_SuccessSelector': 'div.status.alert.alert-success',
+    'alert_SuccessMessage': 'Success! Your details have been submitted successfully.',
+    'CSS_textColor': 'rgb(60, 118, 61)'
+  }
+
+  exportedAsObj = {
+    'meta': this.meta,
+    'getInTouchForm': this.getInTouchForm
+  };
+}
